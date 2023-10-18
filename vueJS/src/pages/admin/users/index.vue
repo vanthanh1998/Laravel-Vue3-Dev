@@ -2,11 +2,11 @@
   <a-card title="Tài khoản" style="width: 100%">
     <div class="row mb-3">
       <div class="col-12 d-flex justify-content-end">
-        <a-button type="primary">
-          <router-link :to="{ name: 'admin-users-create' }">
+        <router-link :to="{ name: 'admin-users-create' }">
+          <a-button type="primary">
             <i class="fa-solid fa-plus"></i>
-          </router-link>
-        </a-button>
+          </a-button>
+        </router-link>
       </div>
     </div>
 
