@@ -45,7 +45,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useMenu } from "../../../stores/use-menu.js";
 
 useMenu().onSelectedKeys(["admin-users"]);
@@ -93,14 +93,18 @@ const columns = [
   },
 ];
 
+onMounted(() => {
+  getUsers();
+});
+
 const getUsers = async () => {
   try {
-    const response = await axios.get("http://127.0.0.1:8000/api/users");
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_BASE_URL}/api/users`
+    );
     users.value = response.data;
   } catch (error) {
     console.error(error);
   }
 };
-
-getUsers();
 </script>
