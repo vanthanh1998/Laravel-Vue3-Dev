@@ -43,7 +43,7 @@
                 :options="users_status"
                 :filter-option="filterOption"
                 allow-clear
-                v-model:value="status_id"
+                v-model:value="users.status_id"
                 :class="{
                   'select-danger': errors.status_id,
                 }"
@@ -72,7 +72,7 @@
               <a-input
                 placeholder="Tên Tài khoản"
                 allow-clear
-                v-model:value="username"
+                v-model:value="users.username"
                 :class="{
                   'select-danger': errors.username,
                 }"
@@ -101,7 +101,7 @@
               <a-input
                 placeholder="Họ và Tên"
                 allow-clear
-                v-model:value="name"
+                v-model:value="users.name"
                 :class="{
                   'select-danger': errors.name,
                 }"
@@ -130,7 +130,7 @@
               <a-input
                 placeholder="Email"
                 allow-clear
-                v-model:value="email"
+                v-model:value="users.email"
                 :class="{
                   'select-danger': errors.email,
                 }"
@@ -163,7 +163,7 @@
                 :options="departments"
                 :filter-option="filterOption"
                 allow-clear
-                v-model:value="department_id"
+                v-model:value="users.department_id"
                 :class="{
                   'select-danger': errors.department_id,
                 }"
@@ -192,7 +192,7 @@
               <a-input-password
                 placeholder="Mật khẩu"
                 allow-clear
-                v-model:value="password"
+                v-model:value="users.password"
                 :class="{
                   'select-danger': errors.password,
                 }"
@@ -216,7 +216,7 @@
               <a-input-password
                 placeholder="Xác nhận mật khẩu"
                 allow-clear
-                v-model:value="password_confirmation"
+                v-model:value="users.password_confirmation"
               />
             </div>
           </div>
@@ -242,7 +242,7 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, ref, toRefs } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import { useMenu } from "../../../stores/use-menu.js";
 import { message } from "ant-design-vue";
 import { useRouter } from "vue-router";
@@ -264,16 +264,6 @@ const users = reactive({
 });
 
 const errors = ref({});
-
-const {
-  username,
-  name,
-  email,
-  password,
-  password_confirmation,
-  department_id,
-  status_id,
-} = toRefs(users);
 
 onMounted(() => {
   getUsersCreate();
