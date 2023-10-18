@@ -15,6 +15,12 @@ const admin = [
                 component: () => import ("../pages/admin/users/create.vue")
             },
 
+            {
+                path: "users/:id/edit",
+                name: "admin-users-edit",
+                component: () => import ("../pages/admin/users/edit.vue")
+            },
+
             // Quản lý Roles
             {
                 path: "roles",
@@ -27,9 +33,15 @@ const admin = [
                 path: "settings",
                 name: "admin-settings",
                 component: () => import ("../pages/admin/settings/index.vue")
-            }
+            },
+            
         ]
-    }
+    },
+    {
+        path: '/:pathMatch(.*)*',
+        name: "notfound",
+        component: () => import ("../pages/NotFound.vue")
+    },
 ];
 
 export default admin;

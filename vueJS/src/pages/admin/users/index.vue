@@ -1,9 +1,20 @@
 <template>
   <a-card title="Tài khoản" style="width: 100%">
+    <div class="row mb-3">
+      <div class="col-12 d-flex justify-content-end">
+        <a-button type="primary">
+          <router-link :to="{ name: 'admin-users-create' }">
+            <i class="fa-solid fa-plus"></i>
+          </router-link>
+        </a-button>
+      </div>
+    </div>
+
     <div class="row">
       <div class="col-12">
         <a-table :dataSource="users" :columns="columns" :scroll="{ x: 576 }">
           <template #bodyCell="{ column, index, record }">
+            <!-- record sẽ lấy data từ users ":dataSource="users"" -->
             <template v-if="column.key === 'index'">
               <span>{{ index + 1 }}</span>
             </template>
@@ -15,6 +26,16 @@
               <span v-else-if="record.status_id == 2" class="text-danger">{{
                 record.status
               }}</span>
+            </template>
+
+            <template v-if="column.key === 'action'">
+              <router-link
+                :to="{ name: 'admin-users-edit', params: { id: record.id } }"
+              >
+                <a-button type="primary">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </a-button>
+              </router-link>
             </template>
           </template>
         </a-table>
