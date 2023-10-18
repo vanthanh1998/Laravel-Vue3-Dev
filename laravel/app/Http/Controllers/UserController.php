@@ -75,21 +75,10 @@ class UserController extends Controller
             "password.confirmed" => "Mật khẩu và Xác nhận mật khẩu không khớp"
         ]);
 
-        // Eloquent ORM (Lưu ý: Khai báo $fillable/ $guarded trong Models User)
-        // Cách 1:
-        User::create([
-            "status_id" => $request["status_id"],
-            "username" => $request["username"],
-            "name" => $request["name"],
-            "email" => $request["email"],
-            "department_id" => $request["department_id"],
-            "password" => \Hash::make($request["password"])
-        ]);
-
         // Cách 2: Dùng với Field + Requet số lượng lớn
-        // $user = $request->except(["password", "password_confirmation"]);
-        // $user["password"] = \Hash::make($request["password"]);
-        // User::create($user);
+         $user = $request->except(["password", "password_confirmation"]);
+         $user["password"] = \Hash::make($request["password"]);
+         User::create($user);
     }
 
     public function edit($id)

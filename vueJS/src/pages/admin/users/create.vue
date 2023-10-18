@@ -244,11 +244,15 @@
 <script setup>
 import { reactive, ref, toRefs } from "vue";
 import { useMenu } from "../../../stores/use-menu.js";
+import { message } from "ant-design-vue";
+import { useRouter } from "vue-router";
 
 useMenu().onSelectedKeys(["admin-users"]);
 
 const users_status = ref([]);
 const departments = ref([]);
+
+const router = useRouter();
 const users = reactive({
   username: "",
   name: "",
@@ -288,9 +292,11 @@ const filterOption = (input, option) => {
 const createUsers = async () => {
   try {
     const response = await axios.post("http://127.0.0.1:8000/api/users", users);
-    console.log(response);
+    if (response) {
+      message.success("Tạo mới thành công");
+      router.push({ name: "admin-users" });
+    }
   } catch (error) {
-    console.log(error);
     errors.value = error.response.data.errors;
   }
 };
